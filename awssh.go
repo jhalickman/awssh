@@ -15,9 +15,14 @@ import (
 )
 
 func setupConfig() {
+	viper.SetDefault("key_folder", "$HOME/.awssh/keys")
+	viper.SetDefault("login_name", "ubuntu")
+
 	viper.SetConfigName("config")
+
 	viper.AddConfigPath("$HOME/.awssh")
 	viper.AddConfigPath(".")
+
 	viper.ReadInConfig()
 }
 
@@ -79,7 +84,7 @@ func promptForInstance(instances InstanceList) (string, error) {
 		return
 	})
 
-	line, err := term.Prompt("Which server do you want to login to? ")
+	line, err := term.Prompt("Which instance do you want to login to? ")
 
 	if err != nil {
 		return "", err
@@ -125,6 +130,7 @@ func main() {
 
 	keypath := fmt.Sprintf("%s/%s.pem", viper.GetString("key_folder"), instance.KeyName)
 	hostpart := fmt.Sprintf("%s@%s", viper.GetString("login_name"), instance.PrivateIpAddress)
+	keypath = os.ExpandEnv(keypath)
 
 	err = runSSH(keypath, hostpart)
 	if err != nil {
