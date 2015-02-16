@@ -14,7 +14,7 @@ $ go get github.com/jhalickman/awssh
 
 #### Binaries
 
-- **mac** [386]() / [amd64]()
+- You can find binaries for most platforms on the [releases page](https://github.com/jhalickman/awssh/releases/latest)
 
 
 ## Configuration
