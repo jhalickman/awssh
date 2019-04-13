@@ -10,7 +10,6 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh 'go build'
             echo 'go build'
           }
         }
