@@ -10,7 +10,8 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh 'make build'
+            sh 'go build'
+            echo 'go build'
           }
         }
         stage('Test') {
@@ -20,7 +21,7 @@ pipeline {
         }
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         input 'Resdy To Deploy'
       }
